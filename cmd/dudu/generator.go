@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func Generate(outputDir string) error {
+func Generate(outputDir string, hotReload, force bool) error {
 	srcFiles := make([]string, 0)
 
 	err := filepath.Walk(srcDir, func(path string, info os.FileInfo, err error) error {
@@ -39,32 +39,39 @@ func Generate(outputDir string) error {
 		oFilePath := filepath.Join(outputDir, strings.Replace(f, ".md", ".html", 1))
 		oPath, _ := filepath.Split(oFilePath)
 
-		ifi, iErr := os.Stat(iFilePath)
-		ofi, oErr := os.Stat(oFilePath)
-
-		if iErr == nil && oErr == nil && ifi.ModTime().Before(ofi.ModTime()) {
-			continue
+		if !force {
+			ifi, iErr := os.Stat(iFilePath)
+			ofi, oErr := os.Stat(oFilePath)
+	
+			if iErr == nil && oErr == nil && ifi.ModTime().Before(ofi.ModTime()) {
+				continue
+			}
 		}
 
 		// Create directory structure
-		err := os.MkdirAll(oPath, 0755)
+		err := os.MkdirAll(oPath, 0700)
 		if err != nil {
 			return err
 		}
 
-		// Run pandoc
-		cmd := exec.Command("pandoc",
+		options := []string{
 			"--standalone",
 			"--css=/style.css",
-			"--highlight-style="+resourceDir+"/code-highlight.theme",
+			"--highlight-style=" + filepath.Join(resourceDir, "code-highlight.theme"),
 			"--variable=lang:en",
-			"--include-before-body="+resourceDir+"/navbar.html",
-			"--include-after-body="+resourceDir+"/footer.html",
-			"--template="+resourceDir+"/template.html",
-			iFilePath,
-			"-o",
-			oFilePath)
+			"--include-before-body=" + filepath.Join(resourceDir, "navbar.html"),
+			"--include-after-body=" + filepath.Join(resourceDir, "footer.html"),
+			"--template=" + filepath.Join(resourceDir, "template.html"),
+		}
 
+		if hotReload {
+			options = append(options, "--include-in-header="+filepath.Join(resourceDir, "hotreload.html"))
+		}
+
+		options = append(options, iFilePath, "-o", oFilePath)
+
+		// Run pandoc
+		cmd := exec.Command("pandoc", options...)
 		if err := cmd.Run(); err != nil {
 			return err
 		}

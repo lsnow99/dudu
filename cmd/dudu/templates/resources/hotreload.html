@@ -1,0 +1,15 @@
+<script>
+    // Relative WS URL generation from https://stackoverflow.com/a/10418013
+    let loc = window.location, new_uri;
+    if (loc.protocol === "https:") {
+        new_uri = "wss:";
+    } else {
+        new_uri = "ws:";
+    }
+    new_uri += "//" + loc.host + "/ws";
+
+    let socket = new WebSocket(new_uri)
+    socket.onmessage = function() {
+        location.reload()
+    }
+</script>
