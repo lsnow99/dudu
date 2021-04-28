@@ -38,12 +38,12 @@ Within the new project folder, some default files will be created for you:
 │   ├── index.html              # Landing page. Does not hot reload
 │   ├── 404.html                # Standard 404 page, redirects to /
 │   ├── style.css               # Global style file
-├── resources                   # This folder contains files for templating
-│   ├── code-highlight.theme    # Theming file for code markdown
-│   ├── footer.html             # Footer to be injected at the bottom of each content page
-│   ├── hotreload.html          # Script injected when running dudu serve
-│   ├── navbar.html             # Navbar to be injected at the top of each content page
-│   └── template.html           # Main template file for all content pages
+└── resources                   # This folder contains files for templating
+    ├── code-highlight.theme    # Theming file for code markdown
+    ├── footer.html             # Footer to be injected at the bottom of each content page
+    ├── hotreload.html          # Script injected when running dudu serve
+    ├── navbar.html             # Navbar to be injected at the top of each content page
+    └── template.html           # Main template file for all content pages
 ```
 
 A common pattern is to have subfolders within `md` to organize your content, and within these subfolders add your posts/pages as `.md` files.
