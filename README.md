@@ -25,7 +25,7 @@ This package uses the `embed` package, which is only available in Go version 1.1
 - `go install github.com/lsnow99/dudu/cmd/dudu@latest`
 
 ### Installation from source
-- `git clone github.com/lsnow99/dudu`
+- `git clone https://github.com/lsnow99/dudu`
 - `go build -o dudu cmd/dudu`
 - `mv dudu $GOBIN`
 
