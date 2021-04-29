@@ -19,6 +19,8 @@ Oh, did you mean why the name? No reason, just thought it sounded cool.
 ## Getting Started
 
 First, consider why you are using this obscure and opinionated static site generator when so many objectively better alternatives exist.
+
+This package uses the `embed` package, which is only available in Go version 1.16 and higher.
 ### Installation (using `go install`)
 - `go install github.com/lsnow99/dudu/cmd/dudu@latest`
 
