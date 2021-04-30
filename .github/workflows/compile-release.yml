@@ -26,20 +26,20 @@ jobs:
 
       - name: Compile for Windows
         run: |
-          GOOS=windows GOARCH=386 go build -o bin/dudu-windows_x86.exe github.com/lsnow99/dudu/cmd/dudu
-          GOOS=windows GOARCH=amd64 go build -o bin/dudu-windows_x64.exe github.com/lsnow99/dudu/cmd/dudu
+          GOOS=windows GOARCH=386 go build -o bin/dudu-windows_x86.exe -ldflags="-X 'main.Version=$(git describe --tags)'" github.com/lsnow99/dudu/cmd/dudu
+          GOOS=windows GOARCH=amd64 go build -o bin/dudu-windows_x64.exe -ldflags="-X 'main.Version=$(git describe --tags)'" github.com/lsnow99/dudu/cmd/dudu
 
       - name: Compile for OS X
         run: |
-          GOOS=darwin GOARCH=amd64 go build -o bin/dudu-osx_amd64 github.com/lsnow99/dudu/cmd/dudu
-          GOOS=darwin GOARCH=arm64 go build -o bin/dudu-osx_arm64 github.com/lsnow99/dudu/cmd/dudu
+          GOOS=darwin GOARCH=amd64 go build -o bin/dudu-osx_amd64 -ldflags="-X 'main.Version=$(git describe --tags)'" github.com/lsnow99/dudu/cmd/dudu
+          GOOS=darwin GOARCH=arm64 go build -o bin/dudu-osx_arm64 -ldflags="-X 'main.Version=$(git describe --tags)'" github.com/lsnow99/dudu/cmd/dudu
 
       - name: Compile for Linux
         run: |
-          GOOS=linux GOARCH=386 go build -o bin/dudu-linux_x86 github.com/lsnow99/dudu/cmd/dudu
-          GOOS=linux GOARCH=amd64 go build -o bin/dudu-linux_x64 github.com/lsnow99/dudu/cmd/dudu
-          GOOS=linux GOARCH=arm go build -o bin/dudu-linux_arm github.com/lsnow99/dudu/cmd/dudu
-          GOOS=linux GOARCH=arm64 go build -o bin/dudu-linux_arm64 github.com/lsnow99/dudu/cmd/dudu
+          GOOS=linux GOARCH=386 go build -o bin/dudu-linux_x86 -ldflags="-X 'main.Version=$(git describe --tags)'" github.com/lsnow99/dudu/cmd/dudu
+          GOOS=linux GOARCH=amd64 go build -o bin/dudu-linux_x64 -ldflags="-X 'main.Version=$(git describe --tags)'" github.com/lsnow99/dudu/cmd/dudu
+          GOOS=linux GOARCH=arm go build -o bin/dudu-linux_arm -ldflags="-X 'main.Version=$(git describe --tags)'" github.com/lsnow99/dudu/cmd/dudu
+          GOOS=linux GOARCH=arm64 go build -o bin/dudu-linux_arm64 -ldflags="-X 'main.Version=$(git describe --tags)'" github.com/lsnow99/dudu/cmd/dudu
 
       # Requires adding a GITHUB_TOKEN secret
       - name: Create GitHub release
