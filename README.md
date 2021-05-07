@@ -1,14 +1,22 @@
 # Dudu
 
-## What is Dudu?
+## FAQ
+
+Believe me, I get asked these _all the time_.
+
+### What is Dudu?
 
 Dudu is a static site generator. It takes [pandoc](https://pandoc.org/) markdown files and renders them into templated HTML, ready to be served as a static site.
 
-## Why Dudu?
+### Why Dudu?
 
 The motivation for Dudu came from realizing there are simply [not enough static site generators](https://staticsitegenerators.net/). In all seriousness, it was inspired by my good friend [Jacob Strieb](https://jstrieb.github.io)'s [similar project](https://github.com/jstrieb/personal-site/) for his personal website. In fact, I borrowed directly from his bash script to replicate the functionality of compiling pandoc markdown in Dudu as `dudu build`. The point of making Dudu was really just because I thought it would be fun to take the work done by Jacob and rebuild it in Go and add new functionality.
 
-Oh, did you mean why the name? No reason, just thought it sounded cool.
+Oh, did you mean why the name? Sorry to disappoint, but there's no fun backstory here- just thought it was fun to say.
+
+### What makes it different from other static site generators?
+
+The emphasis on pandoc is the main aspect of Dudu that sets it apart from other static site generators. It is also rather lightweight and minimal (which is code for not a ton of useful features). Speaking of features...
 
 ## Features
 
@@ -48,7 +56,7 @@ Within the new project folder, some default files will be created for you:
     └── template.html           # Main template file for all content pages
 ```
 
-A common pattern is to have subfolders within `md` to organize your content, and within these subfolders add your posts/pages as `.md` files.
+A common pattern (among the two current users) is to have subfolders within `md` to organize your content, and within these subfolders add your posts/pages as `.md` files.
 
 ## Usage
 - `dudu new` - Scaffolds a new Dudu project
