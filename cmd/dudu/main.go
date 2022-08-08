@@ -233,7 +233,7 @@ func populateProject(projectName, rootFolder string) {
 			populateProject(projectName, fullName)
 		} else {
 			// Create directory structure
-			relName := path.Join(strings.Split(fullName, string(os.PathSeparator))[1:]...)
+			relName := path.Join(strings.Split(fullName, "/")[1:]...)
 			outFile := path.Join(projectName, relName)
 			outPath, _ := path.Split(outFile)
 
