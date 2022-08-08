@@ -10,7 +10,6 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"path"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -229,13 +228,13 @@ func populateProject(projectName, rootFolder string) {
 	}
 
 	for _, entry := range entries {
-		fullName := path.Join(rootFolder, entry.Name())
+		fullName := filepath.Join(rootFolder, entry.Name())
 		if entry.IsDir() {
 			populateProject(projectName, fullName)
 		} else {
 			// Create directory structure
-			relName := path.Join(strings.Split(fullName, string(os.PathSeparator))[1:]...)
-			outFile := path.Join(projectName, relName)
+			relName := filepath.Join(strings.Split(fullName, string(os.PathSeparator))[1:]...)
+			outFile := filepath.Join(projectName, relName)
 			outPath, _ := filepath.Split(outFile)
 
 			if err := os.MkdirAll(outPath, 0700); err != nil {
