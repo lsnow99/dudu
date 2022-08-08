@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"path/filepath"
+	"path"
 	"strconv"
 	"strings"
 	"sync"
@@ -21,7 +21,7 @@ import (
 	"gopkg.in/fsnotify.v1"
 )
 
-const tempDir = "./.dudu"
+const tempDir = ".dudu"
 
 // Version of dudu
 var Version string
@@ -228,14 +228,14 @@ func populateProject(projectName, rootFolder string) {
 	}
 
 	for _, entry := range entries {
-		fullName := filepath.Join(rootFolder, entry.Name())
+		fullName := path.Join(rootFolder, entry.Name())
 		if entry.IsDir() {
 			populateProject(projectName, fullName)
 		} else {
 			// Create directory structure
-			relName := filepath.Join(strings.Split(fullName, string(os.PathSeparator))[1:]...)
-			outFile := filepath.Join(projectName, relName)
-			outPath, _ := filepath.Split(outFile)
+			relName := path.Join(strings.Split(fullName, string(os.PathSeparator))[1:]...)
+			outFile := path.Join(projectName, relName)
+			outPath, _ := path.Split(outFile)
 
 			if err := os.MkdirAll(outPath, 0700); err != nil {
 				log.Println("error:", err)
